@@ -1,0 +1,5 @@
+{
+  "name": "SplitPal",
+  "description": "A web application to simplify managing and splitting shared expenses for groups, friends, and roommates. Track bills, calculate balances, and settle debts with ease.",
+  "requestFramePermissions": []
+}
