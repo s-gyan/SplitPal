@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Group, User, Expense, Balance, Settlement } from '../types';
 import ExpenseFormModal from './ExpenseFormModal';
@@ -37,7 +36,7 @@ const GroupDashboard: React.FC<GroupDashboardProps> = ({
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4">
         <div>
-          <h2 className="text-3xl font-bold text-slate-800">{group.name}</h2>
+          <h2 className="text-3xl font-bold text-slate-100">{group.name}</h2>
           <div className="flex items-center space-x-2 mt-2">
             {groupUsers.map(user => <Avatar key={user.id} user={user} />)}
           </div>
@@ -45,7 +44,7 @@ const GroupDashboard: React.FC<GroupDashboardProps> = ({
         <div className="flex items-center gap-2">
           <button
             onClick={() => setIsSettleUpModalOpen(true)}
-            className="flex items-center justify-center gap-2 px-4 py-2 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50"
+            className="flex items-center justify-center gap-2 px-4 py-2 border border-gray-600 text-sm font-medium rounded-md shadow-sm text-slate-300 bg-gray-700 hover:bg-gray-600"
           >
             <DollarSignIcon className="h-5 w-5"/>
             Settle Up
@@ -61,20 +60,20 @@ const GroupDashboard: React.FC<GroupDashboardProps> = ({
       </div>
 
       {/* Balances */}
-      <div className="bg-white p-6 rounded-lg shadow">
-        <h3 className="text-xl font-semibold mb-4">Balances</h3>
+      <div className="bg-gray-800 p-6 rounded-lg shadow">
+        <h3 className="text-xl font-semibold mb-4 text-slate-100">Balances</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {balances.map(({ userId, amount }) => {
             const user = getUserById(userId);
             if (!user) return null;
             const isOwed = amount > 0;
             return (
-              <div key={userId} className="p-4 rounded-md bg-slate-50 border border-slate-200">
-                <p className="font-medium text-slate-800">{user.name}</p>
+              <div key={userId} className="p-4 rounded-md bg-gray-700 border border-gray-600">
+                <p className="font-medium text-slate-100">{user.name}</p>
                 {amount === 0 ? (
-                  <p className="text-slate-500">Settled up</p>
+                  <p className="text-slate-400">Settled up</p>
                 ) : (
-                  <p className={`font-bold ${isOwed ? 'text-green-600' : 'text-red-600'}`}>
+                  <p className={`font-bold ${isOwed ? 'text-green-400' : 'text-red-400'}`}>
                     {isOwed ? 'Is owed' : 'Owes'} ${Math.abs(amount).toFixed(2)}
                   </p>
                 )}
@@ -85,29 +84,29 @@ const GroupDashboard: React.FC<GroupDashboardProps> = ({
       </div>
 
       {/* Expenses List */}
-      <div className="bg-white p-6 rounded-lg shadow">
-        <h3 className="text-xl font-semibold mb-4">Expenses</h3>
-        <ul className="divide-y divide-slate-200">
+      <div className="bg-gray-800 p-6 rounded-lg shadow">
+        <h3 className="text-xl font-semibold mb-4 text-slate-100">Expenses</h3>
+        <ul className="divide-y divide-gray-700">
           {group.expenses.length > 0 ? group.expenses.map(expense => {
             const payer = getUserById(expense.paidBy);
             return (
               <li key={expense.id} className="py-4 flex items-center justify-between">
                 <div>
-                  <p className="font-medium">{expense.description}</p>
-                  <p className="text-sm text-slate-500">
+                  <p className="font-medium text-slate-200">{expense.description}</p>
+                  <p className="text-sm text-slate-400">
                     {payer?.name} paid ${expense.amount.toFixed(2)}
                   </p>
                 </div>
                 <div className="flex items-center gap-4">
-                  <span className="font-mono text-slate-700">${expense.amount.toFixed(2)}</span>
-                  {!expense.isSettlement && <button onClick={() => onDeleteExpense(expense.id)} className="text-slate-400 hover:text-red-600">
+                  <span className="font-mono text-slate-300">${expense.amount.toFixed(2)}</span>
+                  {!expense.isSettlement && <button onClick={() => onDeleteExpense(expense.id)} className="text-gray-500 hover:text-red-500">
                     <TrashIcon className="h-5 w-5" />
                   </button>}
                 </div>
               </li>
             );
           }).reverse() : (
-            <p className="text-slate-500 text-center py-8">No expenses added yet.</p>
+            <p className="text-slate-400 text-center py-8">No expenses added yet.</p>
           )}
         </ul>
       </div>

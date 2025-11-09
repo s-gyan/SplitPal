@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo, useCallback } from 'react';
 import { Group, User, Expense, SplitType } from './types';
 import Header from './components/Header';
@@ -112,14 +111,14 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-slate-100">
+    <div className="min-h-screen bg-gray-900">
       <Header />
       <main className="p-4 sm:p-6 lg:p-8">
         <div className="max-w-7xl mx-auto grid grid-cols-12 gap-8">
           {/* Sidebar */}
           <aside className="col-span-12 lg:col-span-3">
-            <div className="bg-white rounded-lg shadow p-4 sticky top-8">
-              <h2 className="text-lg font-bold text-slate-800 mb-4">Groups</h2>
+            <div className="bg-gray-800 rounded-lg shadow p-4 sticky top-8">
+              <h2 className="text-lg font-bold text-slate-100 mb-4">Groups</h2>
               <ul>
                 {groups.map(group => (
                   <li key={group.id}>
@@ -127,8 +126,8 @@ const App: React.FC = () => {
                       onClick={() => setActiveGroupId(group.id)}
                       className={`w-full text-left px-3 py-2 rounded-md text-sm font-medium flex items-center gap-3 ${
                         activeGroupId === group.id
-                          ? 'bg-blue-100 text-blue-700'
-                          : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                          ? 'bg-blue-900/50 text-blue-300'
+                          : 'text-slate-400 hover:bg-gray-700 hover:text-white'
                       }`}
                     >
                       <UsersIcon className="h-5 w-5"/>
@@ -160,9 +159,9 @@ const App: React.FC = () => {
                 onSettleDebts={handleSettleDebts}
               />
             ) : (
-              <div className="text-center py-20 bg-white rounded-lg shadow">
-                <h2 className="text-2xl font-semibold text-slate-700">Welcome to SplitPal!</h2>
-                <p className="mt-2 text-slate-500">Select a group or create a new one to start splitting expenses.</p>
+              <div className="text-center py-20 bg-gray-800 rounded-lg shadow">
+                <h2 className="text-2xl font-semibold text-slate-200">Welcome to SplitPal!</h2>
+                <p className="mt-2 text-slate-400">Select a group or create a new one to start splitting expenses.</p>
                  <button
                     onClick={handleCreateGroup}
                     className="mt-6 inline-flex items-center gap-2 px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
